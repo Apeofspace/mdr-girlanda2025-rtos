@@ -8,6 +8,7 @@
 // #include "MDR32F9Qx_timer.h"
 
 void init_CPU();
+void init_USB(uint8_t *buf);
 
 #endif
 

@@ -31,7 +31,7 @@ void init_joystick(void) {
 }
 
 /* Определение "кода" по нажатым кнопкам */
-KeyCode joystick_get_key(void) {
+KeyCode joystick_poll_loop(void) {
   uint32_t i, sKey;
   static uint32_t _js_data[5];
 
@@ -50,6 +50,7 @@ KeyCode joystick_get_key(void) {
     _js_data[3] = (_js_data[3] |= 0x1UL); /* UP       PB5*/
   if (!(PORT_ReadInputDataBit(MDR_PORTE, PORT_Pin_1)))
     _js_data[4] = (_js_data[4] |= 0x1UL); /* DOWN     PE1*/
+  // Все кнопки висят на таймере 3, кроме PE1, которая на таймере 2
 
   // Устроняем дребезг
   static const uint32_t _jitter_mask = 0x1F;

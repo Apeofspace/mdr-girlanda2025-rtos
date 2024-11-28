@@ -17,6 +17,6 @@ typedef enum {
 } KeyCode;
 
 void init_joystick(void);
-KeyCode joystick_get_key(void);
+KeyCode joystick_poll_loop(void);
 
 #endif

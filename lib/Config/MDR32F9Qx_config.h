@@ -94,11 +94,11 @@
 // <i> Leave all commented/unchecked if there is no GPIO pins combined with JTAG.
 
 // <c> JTAG_A pins protection
-     #define USE_JTAG_A
+     // #define USE_JTAG_A
 // </c>
 
 // <c> JTAG_B pins protection
-//    #define USE_JTAG_B
+   #define USE_JTAG_B
 // </c>
 // </h>
 #endif

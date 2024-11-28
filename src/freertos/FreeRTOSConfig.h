@@ -309,7 +309,7 @@
  * switch performing interrupts.  Not supported by all FreeRTOS ports.  See
  * https://www.freertos.org/RTOS-Cortex-M3-M4.html for information specific to
  * ARM Cortex-M devices. */
-#define configKERNEL_INTERRUPT_PRIORITY          0
+#define configKERNEL_INTERRUPT_PRIORITY          255
 
 /* configMAX_SYSCALL_INTERRUPT_PRIORITY sets the interrupt priority above which
  * FreeRTOS API calls must not be made.  Interrupts above this priority are never
@@ -317,11 +317,11 @@
  * highest interrupt priority (0).  Not supported by all FreeRTOS ports.
  * See https://www.freertos.org/RTOS-Cortex-M3-M4.html for information specific to
  * ARM Cortex-M devices. */
-#define configMAX_SYSCALL_INTERRUPT_PRIORITY     0
+#define configMAX_SYSCALL_INTERRUPT_PRIORITY     192
 
 /* Another name for configMAX_SYSCALL_INTERRUPT_PRIORITY - the name used depends
  * on the FreeRTOS port. */
-#define configMAX_API_CALL_INTERRUPT_PRIORITY    0
+#define configMAX_API_CALL_INTERRUPT_PRIORITY    15
 
 /******************************************************************************/
 /* Hook and callback function related definitions. ****************************/
@@ -645,5 +645,15 @@
 #define INCLUDE_xTaskAbortDelay                0
 #define INCLUDE_xTaskGetHandle                 0
 #define INCLUDE_xTaskResumeFromISR             1
+
+#ifdef __NVIC_PRIO_BITS
+#define configPRIO_BITS                     __NVIC_PRIO_BITS
+#else
+#define configPRIO_BITS                     4
+#endif
+
+#define xPortSysTickHandler 					SysTick_Handler
+#define xPortPendSVHandler 						PendSV_Handler
+#define vPortSVCHandler 						SVC_Handler
 
 #endif /* FREERTOS_CONFIG_H */
