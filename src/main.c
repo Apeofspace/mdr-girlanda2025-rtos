@@ -1,4 +1,9 @@
 #include "main.h"
+#include "FreeRTOS.h"
+#include "task.h"
+// #include "queue.h"
+// #include "timers.h"
+// #include "semphr.h"
 
 void init_CPU() {
 //attempts HSE
@@ -27,12 +32,14 @@ void init_CPU() {
 }
 
 int main() {
-// задержка для того, чтобы контроллер успел войти в режим отладки, если вдруг гдето сильный баг
+// задержка для того, чтобы контроллер успел войти в режим отладки
   for (uint32_t del = 0 ; del < 3000000; del++) {
     __NOP();
   }
   init_CPU();
   SystemCoreClockUpdate(); // выставить SystemCoreClock в реальное значение
+
+  vTaskStartScheduler();
 
   while (1) {}
   return 0;

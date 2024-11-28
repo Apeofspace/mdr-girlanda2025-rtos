@@ -1,8 +1,8 @@
 .PHONY: all build cmake clean flash
 
 BUILD_DIR := build
-# BUILD_TYPE ?= Debug
-BUILD_TYPE ?= RelWithDebInfo 
+BUILD_TYPE ?= Debug
+# BUILD_TYPE ?= RelWithDebInfo 
 # BUILD_TYPE ?= Release 
 all: build
 
