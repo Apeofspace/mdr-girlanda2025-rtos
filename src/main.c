@@ -32,9 +32,8 @@ int main() {
     __NOP();
   }
   init_CPU();
-  SystemCoreClockUpdate();
-  while (1) {
+  SystemCoreClockUpdate(); // выставить SystemCoreClock в реальное значение
 
-  }
+  while (1) {}
   return 0;
 }

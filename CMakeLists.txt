@@ -8,7 +8,6 @@ endif()
 cmake_path(GET CMAKE_CURRENT_SOURCE_DIR FILENAME ProjectName)
 string(REPLACE " " "_" ProjectId ${ProjectName})
 project(${ProjectName})
-set(OUTPUT_NAME ${OUTPUT_BIN_NAME})
 
 # -----MCU-----
 set(MCPU cortex-m3)
@@ -87,22 +86,36 @@ set(LINK_OPTS
   -Wl,-Map=${PROJECT_BINARY_DIR}/${PROJECT_NAME}.map,--cref
   -Wl,--gc-sections)
 
-# target_compile_definitions(${OUTPUT_NAME}.elf PRIVATE ${COMP_DEFS})
-add_compile_definitions(${COMP_DEFS})
-add_compile_options(${COMP_OPTS})
-add_link_options(${LINK_OPTS})
+# -----TARGET NAME---------
+set(TARGET_NAME ${OUTPUT_BIN_NAME}.elf)
+set(HEX_FILE ${PROJECT_BINARY_DIR}/${OUTPUT_BIN_NAME}.hex)
+set(BIN_FILE ${PROJECT_BINARY_DIR}/${OUTPUT_BIN_NAME}.bin)
+
+# -----SET COMPILE OPTIONS FOR MAIN TARGET -------
+add_executable(${TARGET_NAME} ${C_SRC} ${C_LIBS} ${STARTUP_SCRIPT} ${LINKER_SCRIPT})
+target_compile_definitions(${TARGET_NAME} PRIVATE ${COMP_DEFS})
+target_compile_options(${TARGET_NAME} PRIVATE ${COMP_OPTS})
+target_link_options(${TARGET_NAME} PRIVATE ${LINK_OPTS})
+# add_compile_definitions(${COMP_DEFS})
+# add_compile_options(${COMP_OPTS})
+# add_link_options(${LINK_OPTS})
+target_link_libraries(${TARGET_NAME} m)
+target_include_directories(${TARGET_NAME} PRIVATE ${INCLUDE_DIRS})
 
 # -----FREERTOS------------
 set(FREERTOS_KERNEL_PATH lib/FreeRTOS-Kernel)
 set(FREERTOS_COMP_DEFS projCOVERAGE_TEST=0)
-set(FREERTOS_HEAP "4" CACHE STRING "" FORCE) # Select the native compile PORT
-set(FREERTOS_PORT "GCC_ARM_CM3" CACHE STRING "" FORCE) # Adding the FreeRTOS-Kernel subdirectory
-# target_include_directories(freertos_config INTERFACE src/freertos)
+set(FREERTOS_HEAP "4" CACHE STRING "" FORCE)
+set(FREERTOS_PORT "GCC_ARM_CM3" CACHE STRING "" FORCE)
+
 add_library(freertos_config INTERFACE)
-include_directories(${INCLUDE_DIRS})
-include_directories(src/freertos)
-target_compile_definitions(freertos_config INTERFACE ${FREERTOS_COMP_DEFS})
+target_include_directories(freertos_config INTERFACE src/freertos)
 add_subdirectory(${FREERTOS_KERNEL_PATH} lib/FreeRTOS-Kernel)
+
+target_compile_definitions(freertos_config INTERFACE ${FREERTOS_COMP_DEFS})
+target_link_libraries(${TARGET_NAME} freertos_kernel freertos_config)
+target_compile_options(freertos_kernel PRIVATE ${COMP_OPTS})
+target_compile_options(freertos_config INTERFACE ${COMP_OPTS})
 
 # -----BUILD TYPE-----
 if("${CMAKE_BUILD_TYPE}" STREQUAL "Release")
@@ -120,19 +133,11 @@ else()
 endif()
 
 # -----BUILD COMMANDS-----
-add_executable(${OUTPUT_NAME}.elf ${C_SRC} ${C_LIBS} ${STARTUP_SCRIPT} ${LINKER_SCRIPT})
-set(HEX_FILE ${PROJECT_BINARY_DIR}/${OUTPUT_NAME}.hex)
-set(BIN_FILE ${PROJECT_BINARY_DIR}/${OUTPUT_NAME}.bin)
-
-# target_include_directories(${OUTPUT_NAME}.elf PRIVATE ${INCLUDE_DIRS})
-target_link_libraries(${OUTPUT_NAME}.elf m) # link math.h
-target_link_libraries(${OUTPUT_NAME}.elf freertos_kernel freertos_config)
-
 add_custom_command(
-  TARGET ${OUTPUT_NAME}.elf
+  TARGET ${TARGET_NAME}
   POST_BUILD
-  COMMAND ${CMAKE_OBJCOPY} -Oihex $<TARGET_FILE:${OUTPUT_NAME}.elf> ${HEX_FILE}
-  COMMAND ${CMAKE_OBJCOPY} -Obinary $<TARGET_FILE:${OUTPUT_NAME}.elf>
+  COMMAND ${CMAKE_OBJCOPY} -Oihex $<TARGET_FILE:${TARGET_NAME}> ${HEX_FILE}
+  COMMAND ${CMAKE_OBJCOPY} -Obinary $<TARGET_FILE:${TARGET_NAME}>
           ${BIN_FILE}
   COMMENT "Building ${HEX_FILE}
     Building ${BIN_FILE}")
