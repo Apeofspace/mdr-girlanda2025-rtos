@@ -1,0 +1,182 @@
+{
+	"archive" : {},
+	"artifacts" : 
+	[
+		{
+			"path" : "FreeRTOS-Kernel/libfreertos_kernel.a"
+		}
+	],
+	"backtrace" : 1,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_library",
+			"target_link_libraries",
+			"target_sources"
+		],
+		"files" : 
+		[
+			"/home/v/proj/mdr-rtos-test/lib/FreeRTOS-Kernel/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 235,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 260,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 241,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 253,
+				"parent" : 0
+			}
+		]
+	},
+	"compileGroups" : 
+	[
+		{
+			"includes" : 
+			[
+				{
+					"backtrace" : 2,
+					"path" : "/home/v/proj/mdr-rtos-test/lib/FreeRTOS-Kernel/include/."
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/v/proj/mdr-rtos-test/lib/FreeRTOS-Kernel/examples/coverity/."
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/v/proj/mdr-rtos-test/lib/FreeRTOS-Kernel/portable/template"
+				}
+			],
+			"language" : "C",
+			"sourceIndexes" : 
+			[
+				0,
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7
+			]
+		}
+	],
+	"dependencies" : 
+	[
+		{
+			"backtrace" : 2,
+			"id" : "freertos_kernel_port::@3b750e658ec9e84f3050"
+		}
+	],
+	"id" : "freertos_kernel::@8d1fe2b5824bfeb7a79b",
+	"name" : "freertos_kernel",
+	"nameOnDisk" : "libfreertos_kernel.a",
+	"paths" : 
+	{
+		"build" : "FreeRTOS-Kernel",
+		"source" : "/home/v/proj/mdr-rtos-test/lib/FreeRTOS-Kernel"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "Source Files",
+			"sourceIndexes" : 
+			[
+				0,
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7
+			]
+		},
+		{
+			"name" : "Object Libraries",
+			"sourceIndexes" : 
+			[
+				8
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "/home/v/proj/mdr-rtos-test/lib/FreeRTOS-Kernel/croutine.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "/home/v/proj/mdr-rtos-test/lib/FreeRTOS-Kernel/event_groups.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "/home/v/proj/mdr-rtos-test/lib/FreeRTOS-Kernel/list.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "/home/v/proj/mdr-rtos-test/lib/FreeRTOS-Kernel/queue.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "/home/v/proj/mdr-rtos-test/lib/FreeRTOS-Kernel/stream_buffer.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "/home/v/proj/mdr-rtos-test/lib/FreeRTOS-Kernel/tasks.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "/home/v/proj/mdr-rtos-test/lib/FreeRTOS-Kernel/timers.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 4,
+			"compileGroupIndex" : 0,
+			"path" : "/home/v/proj/mdr-rtos-test/lib/FreeRTOS-Kernel/portable/MemMang/heap_3.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"isGenerated" : true,
+			"path" : "build/FreeRTOS-Kernel/portable/CMakeFiles/freertos_kernel_port.dir/template/port.c.o",
+			"sourceGroupIndex" : 1
+		}
+	],
+	"type" : "STATIC_LIBRARY"
+}

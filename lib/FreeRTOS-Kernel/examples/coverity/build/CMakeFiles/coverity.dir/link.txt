@@ -1,0 +1,1 @@
+/usr/bin/cc "CMakeFiles/coverity.dir/home/v/proj/mdr-rtos-test/lib/FreeRTOS-Kernel/examples/cmake_example/main.c.o" -o coverity  FreeRTOS-Kernel/libfreertos_kernel.a 

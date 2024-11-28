@@ -1,0 +1,12 @@
+/home/v/proj/mdr-rtos-test/lib/FreeRTOS-Kernel/examples/coverity/build/CMakeFiles/fix_source.dir
+/home/v/proj/mdr-rtos-test/lib/FreeRTOS-Kernel/examples/coverity/build/CMakeFiles/coverity.dir
+/home/v/proj/mdr-rtos-test/lib/FreeRTOS-Kernel/examples/coverity/build/CMakeFiles/edit_cache.dir
+/home/v/proj/mdr-rtos-test/lib/FreeRTOS-Kernel/examples/coverity/build/CMakeFiles/rebuild_cache.dir
+/home/v/proj/mdr-rtos-test/lib/FreeRTOS-Kernel/examples/coverity/build/FreeRTOS-Kernel/CMakeFiles/freertos_kernel.dir
+/home/v/proj/mdr-rtos-test/lib/FreeRTOS-Kernel/examples/coverity/build/FreeRTOS-Kernel/CMakeFiles/edit_cache.dir
+/home/v/proj/mdr-rtos-test/lib/FreeRTOS-Kernel/examples/coverity/build/FreeRTOS-Kernel/CMakeFiles/rebuild_cache.dir
+/home/v/proj/mdr-rtos-test/lib/FreeRTOS-Kernel/examples/coverity/build/FreeRTOS-Kernel/include/CMakeFiles/edit_cache.dir
+/home/v/proj/mdr-rtos-test/lib/FreeRTOS-Kernel/examples/coverity/build/FreeRTOS-Kernel/include/CMakeFiles/rebuild_cache.dir
+/home/v/proj/mdr-rtos-test/lib/FreeRTOS-Kernel/examples/coverity/build/FreeRTOS-Kernel/portable/CMakeFiles/freertos_kernel_port.dir
+/home/v/proj/mdr-rtos-test/lib/FreeRTOS-Kernel/examples/coverity/build/FreeRTOS-Kernel/portable/CMakeFiles/edit_cache.dir
+/home/v/proj/mdr-rtos-test/lib/FreeRTOS-Kernel/examples/coverity/build/FreeRTOS-Kernel/portable/CMakeFiles/rebuild_cache.dir

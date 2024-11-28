@@ -1,0 +1,130 @@
+{
+	"artifacts" : 
+	[
+		{
+			"path" : "coverity"
+		}
+	],
+	"backtrace" : 1,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_executable",
+			"target_link_libraries",
+			"add_dependencies"
+		],
+		"files" : 
+		[
+			"CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 41,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 46,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 44,
+				"parent" : 0
+			}
+		]
+	},
+	"compileGroups" : 
+	[
+		{
+			"includes" : 
+			[
+				{
+					"backtrace" : 2,
+					"path" : "/home/v/proj/mdr-rtos-test/lib/FreeRTOS-Kernel/include/."
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/v/proj/mdr-rtos-test/lib/FreeRTOS-Kernel/examples/coverity/."
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/v/proj/mdr-rtos-test/lib/FreeRTOS-Kernel/portable/template"
+				}
+			],
+			"language" : "C",
+			"sourceIndexes" : 
+			[
+				0
+			]
+		}
+	],
+	"dependencies" : 
+	[
+		{
+			"backtrace" : 2,
+			"id" : "freertos_kernel_port::@3b750e658ec9e84f3050"
+		},
+		{
+			"backtrace" : 2,
+			"id" : "freertos_kernel::@8d1fe2b5824bfeb7a79b"
+		},
+		{
+			"backtrace" : 3,
+			"id" : "fix_source::@6890427a1f51a3e7e1df"
+		}
+	],
+	"id" : "coverity::@6890427a1f51a3e7e1df",
+	"link" : 
+	{
+		"commandFragments" : 
+		[
+			{
+				"fragment" : "",
+				"role" : "flags"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "FreeRTOS-Kernel/libfreertos_kernel.a",
+				"role" : "libraries"
+			}
+		],
+		"language" : "C"
+	},
+	"name" : "coverity",
+	"nameOnDisk" : "coverity",
+	"paths" : 
+	{
+		"build" : ".",
+		"source" : "."
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "Source Files",
+			"sourceIndexes" : 
+			[
+				0
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "/home/v/proj/mdr-rtos-test/lib/FreeRTOS-Kernel/examples/cmake_example/main.c",
+			"sourceGroupIndex" : 0
+		}
+	],
+	"type" : "EXECUTABLE"
+}
