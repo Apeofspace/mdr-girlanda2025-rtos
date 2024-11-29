@@ -12,6 +12,7 @@
 
 #include "main.h"
 // #include "girlanda.h"
+#include "joystick.h"
 
 void init_CPU() {
 //attempts HSE
@@ -61,11 +62,58 @@ void vBlinkyTask (void * pvParameters) {
   bool pin_state = false;
   char boofrx[32];
   init_USB((uint8_t*)boofrx);
+  init_LEDs();
   for ( ;; ) {
     vTaskDelay(500);
     PORT_WriteBit(MDR_PORTB, PORT_Pin_0, pin_state);
     pin_state = !pin_state;
     USB_CDC_SendData((uint8_t*)&SystemCoreClock, 4);
+  }
+  vTaskDelete(NULL);
+}
+
+void vJoystickTask (void * pvParameters) {
+  init_joystick();
+  init_LEDs();
+  bool led_state[5] = {0, 0, 0, 0, 0};
+  for ( ;; ) {
+    vTaskDelay(1);
+    switch (joystick_get_key_loop()) {
+    case SEL:
+      // state.flags.paused = !(state.flags.paused);
+      break;
+    case RIGHT:
+      led_state[0] = !led_state[0];
+      PORT_WriteBit(MDR_PORTB, PORT_Pin_0, led_state[0]);
+      // state.algos.selected++;
+      // if (state.algos.selected >= state.algos.count)
+      // state.algos.selected = 0;
+      // state.recently_switched_algo = true;
+      break;
+    case LEFT:
+      led_state[1] = !led_state[1];
+      PORT_WriteBit(MDR_PORTB, PORT_Pin_1, led_state[1]);
+      // if (state.algos.selected == 0) {
+      // state.algos.selected = state.algos.count - 1;
+      // } else {
+      // state.algos.selected--;
+      // }
+      // state.recently_switched_algo = true;
+      break;
+    case UP:
+      led_state[2] = !led_state[2];
+      PORT_WriteBit(MDR_PORTB, PORT_Pin_2, led_state[2]);
+      // state.speed = (state.speed >= 0.85) ? 1 : state.speed + 0.1;
+      break;
+    case DOWN:
+      led_state[3] = !led_state[3];
+      PORT_WriteBit(MDR_PORTB, PORT_Pin_3, led_state[3]);
+      // state.speed = (state.speed <= 0.25) ? 0.1 : state.speed - 0.1;
+      break;
+    case NOKEY:
+    default:
+      break;
+    }
   }
   vTaskDelete(NULL);
 }
@@ -76,9 +124,9 @@ int main() {
     __NOP();
   }
   init_CPU();
-  init_LEDs();
 
-  xTaskCreate(vBlinkyTask, "blinkytask", 128, NULL, tskIDLE_PRIORITY + 1, NULL);
+  // xTaskCreate(vBlinkyTask, "blinkytask", 128, NULL, tskIDLE_PRIORITY + 1, NULL);
+  xTaskCreate(vJoystickTask, "joysticktask", 128, NULL, tskIDLE_PRIORITY + 1, NULL);
 
   vTaskStartScheduler();
   while (1) {

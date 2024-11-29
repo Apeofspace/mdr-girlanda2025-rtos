@@ -31,6 +31,6 @@ void glowing_gauss(pixel_t *pix, uint16_t ind_left, uint16_t ind_right, uint16_t
 
 /* RNG */
 uint32_t random(uint32_t new_seed);
-void init_RNG();
+void init_girlanda_RNG();
 
 #endif

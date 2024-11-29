@@ -167,7 +167,7 @@ static void init_ADC_noise() {
   ADC1_Cmd(ENABLE); // ВКЛЮЧИТЬ АЦП
 }
 
-void init_RNG() {
+void init_girlanda_RNG() {
   init_ADC_noise();
   _h_seed = get_noise_from_ADC();
 }

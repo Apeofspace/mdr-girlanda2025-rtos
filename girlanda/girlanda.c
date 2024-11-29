@@ -26,7 +26,7 @@ global_state_t state = {
   },
 };
 
-void init_SPI() {
+void init_girlanda_SPI() {
   SSP_InitTypeDef SPI_init_struct;
   PORT_InitTypeDef GPIOInitStruct;
   // Включение тактирования
@@ -111,10 +111,10 @@ void girlanda_loop() {
 }
 
 int init_girland() {
-  init_SPI();
+  init_girlanda_SPI();
   // init_joystick();
   // init_SysTick();
-  init_RNG();
+  init_girlanda_RNG();
 
   memset(pixels, 0, sizeof(pixels));
   state.recently_switched_algo = true;
