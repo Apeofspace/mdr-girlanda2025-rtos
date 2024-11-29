@@ -114,12 +114,11 @@ set(FREERTOS_PORT
 
 add_library(freertos_config INTERFACE)
 target_include_directories(freertos_config INTERFACE ${FREERTOS_CONFIG_H_PATH})
-add_subdirectory(${FREERTOS_KERNEL_PATH})
-
 target_compile_definitions(freertos_config INTERFACE ${FREERTOS_COMP_DEFS})
-target_link_libraries(${TARGET_NAME} freertos_kernel freertos_config)
-target_compile_options(freertos_kernel PRIVATE ${COMP_OPTS})
 target_compile_options(freertos_config INTERFACE ${COMP_OPTS})
+
+add_subdirectory(${FREERTOS_KERNEL_PATH})
+target_link_libraries(${TARGET_NAME} freertos_kernel freertos_config)
 
 # -----BUILD TYPE-----
 if("${CMAKE_BUILD_TYPE}" STREQUAL "Release")

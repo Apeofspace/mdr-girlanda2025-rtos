@@ -6,6 +6,49 @@
 #include "joystick.h"
 #include "MDR32F9Qx_port.h"
 
+// struct joystick_buttons_t {
+//   key_code_t code;
+//   PORT_Pin_TypeDef pin;
+//   MDR_PORT_TypeDef *port;
+//   PORT_FUNC_TypeDef func;
+//   MDR_TIMER_TypeDef *timer;
+// } joystick_buttons[5] = {
+//   {
+//     .code = SEL,
+//     .pin = PORT_Pin_2,
+//     .port = MDR_PORTC,
+//     .func = PORT_FUNC_ALTER,
+//     .timer = MDR_TIMER3,
+//   },
+//   {
+//     .code = RIGHT,
+//     .pin = PORT_Pin_6,
+//     .port = MDR_PORTB,
+//     .func = PORT_FUNC_OVERRID,
+//     .timer = MDR_TIMER3,
+//   },
+//   {
+//     .code = LEFT,
+//     .pin = PORT_Pin_3,
+//     .port = MDR_PORTE,
+//     .func = PORT_FUNC_ALTER,
+//     .timer = MDR_TIMER2,
+//   },
+//   {
+//     .code = UP,
+//     .pin = PORT_Pin_5,
+//     .port = MDR_PORTB,
+//     .func = PORT_FUNC_OVERRID,
+//     .timer = MDR_TIMER3,
+//   },
+//   {
+//     .code = DOWN,
+//     .pin = PORT_Pin_1,
+//     .port = MDR_PORTE,
+//     .func = PORT_FUNC_ALTER,
+//     .timer = MDR_TIMER2,
+//   },
+// };
 
 void init_joystick(void) {
   PORT_InitTypeDef GPIO_user_init;

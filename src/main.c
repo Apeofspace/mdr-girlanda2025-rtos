@@ -35,6 +35,7 @@ void init_CPU() {
     MDR_RST_CLK->CPU_CLOCK |= 0 << 4; //c3 divider = 0
     MDR_RST_CLK->CPU_CLOCK |= 1 << 8; //HCLK -> c3
   }
+  SystemCoreClockUpdate(); // выставить SystemCoreClock в реальное значение
 }
 
 void init_LEDs() {
@@ -54,13 +55,6 @@ void init_LEDs() {
 }
 
 
-void vDefaultTask (void * pvParameters) {
-  for ( ;; ) {
-    vTaskDelay(1);
-  }
-  vTaskDelete(NULL);
-}
-
 void vBlinkyTask (void * pvParameters) {
   bool pin_state = false;
   char boofrx[32];
@@ -73,9 +67,6 @@ void vBlinkyTask (void * pvParameters) {
   }
   vTaskDelete(NULL);
 }
-// TODO
-// 1) blinky
-// 2) joystick exti
 
 int main() {
 // задержка для того, чтобы контроллер успел войти в режим отладки
@@ -84,7 +75,6 @@ int main() {
   }
   init_CPU();
   init_LEDs();
-  SystemCoreClockUpdate(); // выставить SystemCoreClock в реальное значение
 
   xTaskCreate(vBlinkyTask, "blinkytask", 128, NULL, tskIDLE_PRIORITY + 1, NULL);
 
