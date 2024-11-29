@@ -38,8 +38,8 @@ file(GLOB_RECURSE C_SRC CONFIGURE_DEPENDS src/*.c)
 file(GLOB_RECURSE C_LIBS CONFIGURE_DEPENDS lib/CMSIS/*.c
      lib/MDR32F9Qx_StdPeriph_Driver/*.c)
 
-set(INCLUDE_DIRS
-    src
+set(INCLUDE_DIRS src)
+set(INCLUDE_DIRS_LIBS
     lib
     lib/Config
     lib/CMSIS/CM3/DeviceSupport/MDR32F9Qx/inc
@@ -98,7 +98,8 @@ target_compile_definitions(${TARGET_NAME} PRIVATE ${COMP_DEFS})
 target_compile_options(${TARGET_NAME} PRIVATE ${COMP_OPTS})
 target_link_options(${TARGET_NAME} PRIVATE ${LINK_OPTS})
 target_link_libraries(${TARGET_NAME} m)
-target_include_directories(${TARGET_NAME} PRIVATE ${INCLUDE_DIRS})
+target_include_directories(${TARGET_NAME} PRIVATE ${INCLUDE_DIRS}
+                                                  ${INCLUDE_DIRS_LIBS})
 
 # -----FREERTOS------------
 set(FREERTOS_CONFIG_H_PATH src/freertos)
@@ -113,7 +114,7 @@ set(FREERTOS_PORT
 
 add_library(freertos_config INTERFACE)
 target_include_directories(freertos_config INTERFACE ${FREERTOS_CONFIG_H_PATH})
-add_subdirectory(${FREERTOS_KERNEL_PATH} lib/FreeRTOS-Kernel)
+add_subdirectory(${FREERTOS_KERNEL_PATH})
 
 target_compile_definitions(freertos_config INTERFACE ${FREERTOS_COMP_DEFS})
 target_link_libraries(${TARGET_NAME} freertos_kernel freertos_config)
