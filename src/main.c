@@ -1,15 +1,17 @@
-#include "main.h"
 #include "FreeRTOS.h"
-#include "MDR32F9Qx_usb_CDC.h"
-#include "system_MDR32F9Qx.h"
 #include "task.h"
 // #include "queue.h"
 // #include "timers.h"
 // #include "semphr.h"
 
-#include "MDR32F9Qx_port.h"             // Keil::Drivers:PORT
 #include "MDR32Fx.h"                    // Keil::Device:Startup
+#include "system_MDR32F9Qx.h"
+#include "MDR32F9Qx_port.h"             // Keil::Drivers:PORT
 #include "MDR32F9Qx_rst_clk.h"          // Keil::Drivers:RST_CLK
+#include "MDR32F9Qx_usb_CDC.h"
+
+#include "main.h"
+// #include "girlanda.h"
 
 void init_CPU() {
 //attempts HSE

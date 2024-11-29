@@ -1,54 +1,7 @@
-/*
-Миландровская библиотека переписанная так, чтобы на неё не так страшно было смотреть
-Ловит нажатия кнопочек на платочке от LDM
-*/
+#include "MDR32F9Qx_port.h"
+#include "MDR32F9Qx_rst_clk.h"
 
 #include "joystick.h"
-#include "MDR32F9Qx_port.h"
-
-// struct joystick_buttons_t {
-//   key_code_t code;
-//   PORT_Pin_TypeDef pin;
-//   MDR_PORT_TypeDef *port;
-//   PORT_FUNC_TypeDef func;
-//   MDR_TIMER_TypeDef *timer;
-// } joystick_buttons[5] = {
-//   {
-//     .code = SEL,
-//     .pin = PORT_Pin_2,
-//     .port = MDR_PORTC,
-//     .func = PORT_FUNC_ALTER,
-//     .timer = MDR_TIMER3,
-//   },
-//   {
-//     .code = RIGHT,
-//     .pin = PORT_Pin_6,
-//     .port = MDR_PORTB,
-//     .func = PORT_FUNC_OVERRID,
-//     .timer = MDR_TIMER3,
-//   },
-//   {
-//     .code = LEFT,
-//     .pin = PORT_Pin_3,
-//     .port = MDR_PORTE,
-//     .func = PORT_FUNC_ALTER,
-//     .timer = MDR_TIMER2,
-//   },
-//   {
-//     .code = UP,
-//     .pin = PORT_Pin_5,
-//     .port = MDR_PORTB,
-//     .func = PORT_FUNC_OVERRID,
-//     .timer = MDR_TIMER3,
-//   },
-//   {
-//     .code = DOWN,
-//     .pin = PORT_Pin_1,
-//     .port = MDR_PORTE,
-//     .func = PORT_FUNC_ALTER,
-//     .timer = MDR_TIMER2,
-//   },
-// };
 
 void init_joystick(void) {
   PORT_InitTypeDef GPIO_user_init;
@@ -73,8 +26,9 @@ void init_joystick(void) {
   PORT_Init(MDR_PORTE, &GPIO_user_init);
 }
 
+
 /* Определение "кода" по нажатым кнопкам */
-KeyCode joystick_poll_loop(void) {
+KeyCode joystick_get_key_loop(void) {
   uint32_t i, sKey;
   static uint32_t _js_data[5];
 
@@ -93,7 +47,6 @@ KeyCode joystick_poll_loop(void) {
     _js_data[3] = (_js_data[3] |= 0x1UL); /* UP       PB5*/
   if (!(PORT_ReadInputDataBit(MDR_PORTE, PORT_Pin_1)))
     _js_data[4] = (_js_data[4] |= 0x1UL); /* DOWN     PE1*/
-  // Все кнопки висят на таймере 3, кроме PE1, которая на таймере 2
 
   // Устроняем дребезг
   static const uint32_t _jitter_mask = 0x1F;
@@ -120,4 +73,3 @@ KeyCode joystick_poll_loop(void) {
   }
   return NOKEY;
 }
-

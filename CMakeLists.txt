@@ -101,6 +101,15 @@ target_link_libraries(${TARGET_NAME} m)
 target_include_directories(${TARGET_NAME} PRIVATE ${INCLUDE_DIRS}
                                                   ${INCLUDE_DIRS_LIBS})
 
+# ------GIRLANDA-----------
+add_subdirectory(girlanda)
+target_compile_definitions(girlanda PRIVATE ${COMP_DEFS})
+target_compile_options(girlanda PRIVATE ${COMP_OPTS})
+target_link_options(girlanda PRIVATE ${LINK_OPTS}) # ??
+target_link_libraries(girlanda m)
+target_include_directories(girlanda PRIVATE ${INCLUDE_DIRS_LIBS})
+target_link_libraries(${TARGET_NAME} girlanda)
+
 # -----FREERTOS------------
 set(FREERTOS_CONFIG_H_PATH src/freertos)
 set(FREERTOS_KERNEL_PATH lib/FreeRTOS-Kernel)
