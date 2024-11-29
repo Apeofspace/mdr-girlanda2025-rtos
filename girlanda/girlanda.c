@@ -91,43 +91,13 @@ void send_pixels() {
   }
 }
 
-void girlanda_loop() {
-  // программный таймер на систике
-  const static uint32_t main_loop_period_ms = 10;
-  static uint32_t t0_main_loop = 0;
-  uint32_t time_elapsed = GetMs() - t0_main_loop;
-  if (time_elapsed < main_loop_period_ms)
-    return;
-  t0_main_loop = GetMs();
-
-  if (!(state.flags.paused) && (state.algos.count > 0)) {
-    state.ms += main_loop_period_ms; // инкрементировать время
-    void (*algo_func)(pixel_t*) = state.algos.funcs[state.algos.selected];
-    algo_func(pixels); // вызов функции генерации
-    state.recently_switched_algo = false;
-    state.last_ms = state.ms;
-    send_pixels(); // отправка на гирлянду
-  }
-}
-
+// extern uint32_t _h_seed;
 int init_girland() {
   init_girlanda_SPI();
-  // init_joystick();
-  // init_SysTick();
   init_girlanda_RNG();
+  // _h_seed = 123123;
 
   memset(pixels, 0, sizeof(pixels));
   state.recently_switched_algo = true;
-
-  /* !!Регистрация алгоритмов!! */
-  register_alg(two_noodles);
-  register_alg(danger_noodle);
-  register_alg(breath_colors2);
-  register_alg(breath_colors);
-
-  // while (1) {
-  //   // joystick_loop();
-  //   girlanda_loop();
-  // }
   return 0;
 }

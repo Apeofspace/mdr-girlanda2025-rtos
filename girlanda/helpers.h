@@ -9,14 +9,8 @@
 #define MAX(a, b) ((a) > (b) ? (a) : (b))
 
 /* Переменные */
-extern volatile uint32_t msSinceStart;
-extern bool SysTickInitialized;
 
 /* Таймер */
-#define GetMs() (msSinceStart)
-// void SysTick_Handler(void);
-// void init_SysTick();
-// uint8_t MDR_Delay(uint32_t ms);
 float get_delta_period(const uint32_t period);
 float get_delta_steps(const float ms_per_step);
 

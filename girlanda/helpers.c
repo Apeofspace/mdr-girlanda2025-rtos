@@ -127,15 +127,9 @@ uint32_t random(uint32_t new_seed) {
 
 int get_noise_from_ADC() {
   // ШУМ для сидирования псевдорандома
-  uint32_t t0 = GetMs();
   ADC1_SetChannel(ADC_CH_ADC1);
   ADC1_Start();
-  while (!(ADC1_GetStatus() & ADCx_FLAG_END_OF_CONVERSION)) {
-    if (GetMs() - t0 > 2) {
-      // timeout error
-      return 12345;
-    }
-  }
+  while (!(ADC1_GetStatus() & ADCx_FLAG_END_OF_CONVERSION)) { }
   return (uint16_t)ADC1_GetResult();
 }
 

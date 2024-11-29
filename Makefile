@@ -3,6 +3,7 @@
 BUILD_DIR := build
 # BUILD_TYPE ?= Debug
 BUILD_TYPE ?= RelWithDebInfo 
+# BUILD_TYPE ?= MinSizeRel 
 # BUILD_TYPE ?= Release 
 all: build
 
