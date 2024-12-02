@@ -75,6 +75,8 @@ void vBlinkyTask (void * pvParameters) {
 }
 
 void vJoystickTask (void * pvParameters) {
+  volatile UBaseType_t uxHighWaterMark;
+  uxHighWaterMark = uxTaskGetStackHighWaterMark( NULL );
   init_joystick();
   for ( ;; ) {
     vTaskDelay(1);
@@ -106,6 +108,7 @@ void vJoystickTask (void * pvParameters) {
     default:
       break;
     }
+    uxHighWaterMark = uxTaskGetStackHighWaterMark( NULL );
   }
 }
 
@@ -124,6 +127,9 @@ void vGirlandaProducerTask(void * pvParameters) {
   state.ms = 0;
   state.last_ms = 0;
 
+  volatile UBaseType_t uxHighWaterMark;
+  uxHighWaterMark = uxTaskGetStackHighWaterMark( NULL );
+
   for (;;) {
     if (!(state.flags.paused)) {
       state.ms += period;
@@ -134,20 +140,24 @@ void vGirlandaProducerTask(void * pvParameters) {
       xSemaphoreGive(*send_smphr);
     }
     xTaskDelayUntil(&t, period);
+    uxHighWaterMark = uxTaskGetStackHighWaterMark( NULL );
   }
 }
 
 void vGirlandaSenderTask(void * pvParameters) {
   SemaphoreHandle_t *send_smphr = (SemaphoreHandle_t*) pvParameters;
+  volatile UBaseType_t uxHighWaterMark;
+  uxHighWaterMark = uxTaskGetStackHighWaterMark( NULL );
   for (;;) {
     xSemaphoreTake(*send_smphr, portMAX_DELAY);
     send_pixels();
+    uxHighWaterMark = uxTaskGetStackHighWaterMark( NULL );
   }
 }
 
 int main() {
 // задержка для того, чтобы контроллер успел войти в режим отладки
-  for (uint32_t del = 0 ; del < 1000000; del++) {
+  for (uint32_t del = 0 ; del < 500000; del++) {
     __NOP();
   }
   init_CPU();
