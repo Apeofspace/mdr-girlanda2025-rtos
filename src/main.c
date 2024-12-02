@@ -77,7 +77,6 @@ void vBlinkyTask (void * pvParameters) {
 void vJoystickTask (void * pvParameters) {
   volatile UBaseType_t uxHighWaterMark;
   uxHighWaterMark = uxTaskGetStackHighWaterMark( NULL );
-  init_joystick();
   for ( ;; ) {
     vTaskDelay(1);
     switch (joystick_get_key_loop()) {
@@ -115,7 +114,6 @@ void vJoystickTask (void * pvParameters) {
 void vGirlandaProducerTask(void * pvParameters) {
   const uint32_t period = 10;
   SemaphoreHandle_t *send_smphr = (SemaphoreHandle_t*) pvParameters;
-  init_girland();
 
   /* !!Регистрация алгоритмов!! */
   register_alg(two_noodles);
@@ -161,6 +159,9 @@ int main() {
     __NOP();
   }
   init_CPU();
+  init_joystick();
+  init_girland();
+
   static SemaphoreHandle_t send_smphr;
   send_smphr = xSemaphoreCreateBinary();
 
