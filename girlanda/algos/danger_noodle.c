@@ -26,7 +26,7 @@ typedef struct {
 
 typedef struct {
   int body_len; // 0 = head only.
-  bool max_size_achieved;
+  bool is_max_size;
   snake_food_t *food;
   struct sn_borders_t {
     int left;
@@ -101,7 +101,7 @@ void init_snake(snake_par_t *snake, snake_food_t *food, int left_border_pos, int
     b->color.green = 0;
     b->color.blue = 0;
   }
-  snake->max_size_achieved = false;
+  snake->is_max_size = false;
   // </MANUAL CLEAN>
 
   // asserts (not extensive really)
@@ -186,7 +186,7 @@ void snake_step(snake_par_t *snake, pixel_t *pix) {
     // win?
     if (snake->body_len >= max_len) {
       // TODO cool animated sequence
-      snake->max_size_achieved = true;
+      snake->is_max_size = true;
       snake_errors.victory_achieved++;
     }
   }
@@ -201,7 +201,7 @@ void snake_step(snake_par_t *snake, pixel_t *pix) {
 }
 
 void danger_noodle(pixel_t *pix) {
-  if (state.recently_switched_algo || snakes[0].max_size_achieved) {
+  if (state.recently_switched_algo || snakes[0].is_max_size) {
     init_snake(&snakes[0], &snake_food, 0, LEDS_NUMBER - 1, FORWARD);
     spawn_new_food(&snake_food, snakes, 1);
     _s_steps = 0;
@@ -227,10 +227,10 @@ void two_noodles(pixel_t *pix) {
   _s_steps += get_delta_steps(_S_MS_PER_STEP);
   while (_s_steps >= 1) {
     _s_steps--;
-    if (snakes[0].max_size_achieved) {
+    if (snakes[0].is_max_size) {
       init_snake(&snakes[0], &snake_food, 0, 99, FORWARD);
     }
-    if (snakes[1].max_size_achieved) {
+    if (snakes[1].is_max_size) {
       init_snake(&snakes[1], &snake_food, 100, 199, BACKWARD);
     }
     if (snake_food.eaten) {
@@ -267,7 +267,7 @@ void hella_noodles(pixel_t *pix) {
     for (int i = 0; i < noodles; i++) {
       left += inc;
       right += inc;
-      if (snakes[i].max_size_achieved) {
+      if (snakes[i].is_max_size) {
         init_snake(&snakes[i], &snake_food, left, right, FORWARD);
       }
     }

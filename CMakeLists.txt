@@ -64,7 +64,7 @@ set(COMP_OPTS
     -mfloat-abi=soft
     -ffunction-sections
     -fdata-sections
-    -flto
+    -flto # link time optimization
     -fmessage-length=0
     -Wextra
     -Wshadow
