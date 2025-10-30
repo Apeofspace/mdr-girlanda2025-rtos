@@ -1,0 +1,20 @@
+Language: Cpp
+BasedOnStyle: Google
+IndentWidth: 2
+ColumnLimit: 125
+AlignConsecutiveAssignments:
+  Enabled: false
+  AcrossComments: true
+  PadOperators: true
+AlignConsecutiveMacros:
+  Enabled: true
+PointerAlignment: Right
+SpaceAfterCStyleCast: true
+# SpaceAfterOperatorKeyword: true # required clang-format 21
+SpaceBeforeAssignmentOperators: true
+SpaceBeforeRangeBasedForLoopColon: true
+SpaceBeforeParens: ControlStatements
+SpacesInParens: Custom
+SpacesInParensOptions:
+  InConditionalStatements: true
+  Other: true

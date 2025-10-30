@@ -5,8 +5,8 @@ endif()
 
 # -----PROJECT NAME-----
 # this hack puts dir name as project name
-cmake_path(GET CMAKE_CURRENT_SOURCE_DIR FILENAME ProjectName)
-string(REPLACE " " "_" ProjectId ${ProjectName})
+cmake_path(GET CMAKE_CURRENT_SOURCE_DIR FILENAME DirName)
+string(REPLACE " " "_" ProjectName ${DirName})
 project(${ProjectName})
 
 # -----MCU-----
